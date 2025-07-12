@@ -4,12 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Вход | VelionBot</title>
-  <meta name="description" content="Войдите через Discord, чтобы получить доступ к панели управления VelionBot." />
-  <link rel="icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
-  <meta property="og:title" content="Вход | VelionBot" />
-  <meta property="og:description" content="Авторизуйтесь через Discord и управляйте своим опытом с VelionBot." />
-  <meta property="og:image" content="https://www.velion.site/imgs/velionbot.png" />
+  <link rel="icon" href="..imgs/favicon.ico" type="image/x-icon">
+  <meta name="description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta name="keywords" content="Дискорд, бот, VelionBot, развлечения, Twitch, Steam, мини-игры, модерация, Discord bot" />
+  <meta name="author" content="VelionBot Team" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VelionBot — Дискорд бот для управления и развлечений" />
+  <meta property="og:description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
   <meta property="og:url" content="https://www.velion.site/login" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VelionBot — Дискорд бот для управления и развлечений" />
+  <meta name="twitter:description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
   <meta name="theme-color" content="#10B981" />
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -64,7 +71,7 @@
     <p class="text-lg md:text-xl text-gray-400 mb-10">Войдите через Discord, чтобы продолжить</p>
 
     <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-      <a href="/login" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-green-400 text-white font-semibold text-lg button-shadow hover:scale-105 transition-all duration-300">
+      <a href="{{ url_for('discord_login') }}" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-green-400 text-white font-semibold text-lg button-shadow hover:scale-105 transition-all duration-300">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" class="w-6 h-6" />
         Войти через Discord
       </a>

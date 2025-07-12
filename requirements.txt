@@ -1,6 +1,3 @@
-fastapi
-uvicorn
-httpx
-Flask==2.3.3
+Flask
 requests
-python-dotenv
+gunicorn

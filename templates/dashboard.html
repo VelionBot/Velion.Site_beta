@@ -4,7 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Панель управления | VelionBot</title>
-  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="..imgs/favicon.ico" type="image/x-icon">
+  <meta name="description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta name="keywords" content="Дискорд, бот, VelionBot, развлечения, Twitch, Steam, мини-игры, модерация, Discord bot" />
+  <meta name="author" content="VelionBot Team" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VelionBot — Дискорд бот для управления и развлечений" />
+  <meta property="og:description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta property="og:url" content="https://velion.site/dashboard" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VelionBot — Дискорд бот для управления и развлечений" />
+  <meta name="twitter:description" content="VelionBot — мощный дискорд бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -233,32 +245,43 @@
     <h1 class="text-4xl font-bold mb-10 gradient-text">Добро пожаловать в Панель</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div class="card" id="profile-card">
-        <div class="flex items-center gap-4 mb-4">
-            <img id="user-avatar" src="" alt="avatar" class="w-12 h-12 rounded-full" />
-            <h2 class="text-3xl font-semibold" id="user-name">Профиль</h2>
-        </div>
-        <p class="text-gray-300 leading-relaxed text-lg">
-        👤 Ник: <span id="user-tag">@Loading...</span><br>
-        🆔 ID: <span id="user-id">Загрузка...</span>
-        </p>
-        </div>
-
+<div class="card" id="profile-card">
+  <div class="flex items-center gap-4 mb-4">
+    {% if user.avatar %}
+      <img
+        class="w-24 h-24 rounded-full border-4 border-green-400"
+        src="https://cdn.discordapp.com/avatars/{{ user.id }}/{{ user.avatar }}.png"
+        alt="Аватар пользователя"
+      />
+    {% else %}
+      <div class="w-24 h-24 rounded-full bg-green-700 flex items-center justify-center text-white text-4xl font-bold border-4 border-green-400">
+        {{ user.username[0] }}
+      </div>
+    {% endif %}
+    <h2 class="text-3xl font-semibold">{{ user.get('global_name', '') or user.username }}</h2>
+  </div>
+  <p class="text-gray-300 leading-relaxed text-lg">
+    👤 Ник: <span>@{{ user.username }}</span><br>
+    🆔 ID: <span>{{ user.id }}</span><br>
+    ✨ ЛВЛ: <span>{{ users_data.level }}</span>
+    💎 Баланс: <span>{{ users_data.wallet_balance }}</span>
+  </p>
+</div>
 
       <div class="card">
         <div class="flex items-center gap-4 mb-4">
           <img src="https://cdn-icons-png.flaticon.com/512/10065/10065425.png" class="w-12 h-12" />
           <h2 class="text-3xl font-semibold">VelionBank</h2>
         </div>
-        <p class="text-gray-300 leading-relaxed text-lg">🔐 Счёт: VB-902142<br>🏦 Уровень: Elite<br>💎 Баланс: 3,250 Кристаллов Этерии</p>
+        <p class="text-gray-300 leading-relaxed text-lg">🔐 Счёт: {{ bank_data.bank_id }}<br>💳 Тип карты: {{ bank_data.card_type }}<br>💳 Карта: {{ bank_data.card }}<br>💎 Баланс: {{ bank_data.balance }} Кристаллов Этерии</p>
       </div>
 
       <div class="card">
         <div class="flex items-center gap-4 mb-4">
           <img src="https://cdn-icons-png.flaticon.com/512/10065/10065398.png" class="w-12 h-12" />
-          <h2 class="text-3xl font-semibold">Активность</h2>
+          <h2 class="text-3xl font-semibold">Ежедневная активность</h2>
         </div>
-        <p class="text-gray-300 leading-relaxed text-lg">💬 Сообщений: 1452<br>🕒 Последняя активность: 12 мин назад<br>🔥 Уровень: Высокий</p>
+        <p class="text-gray-300 leading-relaxed text-lg">💬 Сообщений: {{ users_data.daily_activity.messages_sent }}<br>⚙️ Команды: {{ users_data.daily_activity.commands_used }}</p>
       </div>
 
       <div class="card">
