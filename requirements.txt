@@ -4,3 +4,4 @@ pytz
 discord.py
 gunicorn
 Pillow
+python-dotenv
