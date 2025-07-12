@@ -124,8 +124,8 @@ def logout():
     return redirect(url_for('index'))
 
 # === Запуск сайта и бота одновременно ===
-def run_flask():
-    app.run(host="0.0.0.0", port=5000)
+port = int(os.environ.get("PORT", 5000))  # Render сам задаёт PORT
+app.run(host="0.0.0.0", port=port)
 
 app = Flask(__name__, static_folder='imgs')
 
