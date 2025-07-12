@@ -124,7 +124,7 @@ def logout():
 
 def run_flask():
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='100.20.92.101', port=port)
 
 if __name__ == '__main__':
     # Start Discord bot in background
