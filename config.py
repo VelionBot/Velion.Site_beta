@@ -1,3 +1,8 @@
-BOT_TOKEN = "MTM5MjkxMjY1MjkxNjg4NzYwMg.Gp3j85.IHTGntaueFEhBoPdWwj1Wo4eZreBvLLUGy2g80"
-STEAM_API_KEY = "CBF36A2135E19ADBB8198C7019A11FAC"
-BOT_VERSION = "0.4"
+import os
+from dotenv import load_dotenv
+
+load_dotenv() 
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+STEAM_API_KEY = os.getenv("STEAM_API_KEY")
+BOT_VERSION = "0.2"  # по умолчанию
