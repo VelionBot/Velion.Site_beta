@@ -1,3 +1,5 @@
 Flask
+discord.py
 requests
-gunicorn
+Pillow
+python-dotenv
