@@ -122,9 +122,8 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-# === Запуск Flask + бота ===
 def run_flask():
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5000))  # Render задаёт PORT
     app.run(host="0.0.0.0", port=port)
 
 if __name__ == '__main__':
