@@ -4,7 +4,10 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'supersecretkey')  # 🔐 В проде задавай через переменные окружения
+from dotenv import load_dotenv
+load_dotenv()
 
+DISCORD_CLIENT_ID = os.getenv("DISCORD_CLIENT_ID")
 CLIENT_ID = os.getenv('DISCORD_CLIENT_ID')
 CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
 REDIRECT_URI = os.getenv('REDIRECT_URI')
@@ -41,7 +44,7 @@ def get_user_guilds(access_token, bot_id):
 def index():
     if 'user' in session:
         return redirect(url_for('dashboard'))
-    return render_template('login.html')
+    return render_template('index.html')
 
 
 @app.route('/login')
