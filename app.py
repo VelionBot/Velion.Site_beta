@@ -122,13 +122,13 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-def run_app():
+def run_flask():
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)  # debug=False in production
+    app.run(host='0.0.0.0', port=port)
 
 if __name__ == '__main__':
-    # Start Discord bot in a thread
-    Thread(target=start_bot, daemon=True).start()  # daemon=True ensures bot stops with Flask
+    # Start Discord bot in background
+    Thread(target=start_bot, daemon=True).start()
     
-    # Start Flask app
-    run_app()
+    # Start Flask (must be last)
+    run_flask()

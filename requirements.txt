@@ -1,5 +1,5 @@
-Flask
-discord.py
+flask
 requests
-Pillow
-python-dotenv
+pytz
+discord.py
+gunicorn

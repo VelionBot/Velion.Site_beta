@@ -1,7 +1,6 @@
 services:
   - type: web
-    name: velion-site
+    name: velion-site_beta
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app.py"
-    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
