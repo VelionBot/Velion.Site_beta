@@ -1,0 +1,44 @@
+services:
+  - type: static
+    name: velion-site
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /docs
+        destination: /docs/documentation.html
+
+      - type: rewrite
+        source: /docs/*
+        destination: /docs/:splat
+
+      - type: rewrite
+        source: /templates/dashboard
+        destination: /dashboard.html
+
+      - type: rewrite
+        source: /templates/login
+        destination: /login.html
+
+      - type: rewrite
+        source: /templates/velionbank
+        destination: /velionbank.html
+
+      - type: rewrite
+        source: /termsofuse
+        destination: /termsofuse.html
+
+      - type: rewrite
+        source: /privacy
+        destination: /privacy.html
+
+      - type: rewrite
+        source: /*
+        destination: /404.html
+
+      - type: redirect
+        source: /docs/documentation
+        destination: /docs
+        status: 301
+

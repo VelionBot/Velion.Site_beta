@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>VelionBot — Политика конфиденциальности</title>
+  <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
+  <meta name="description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta name="keywords" content="Телеграм, бот, VelionBot, развлечения, Twitch, Steam, мини-игры, модерация, Telegram bot" />
+  <meta name="author" content="VelionBot Team" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VelionBot — Telegram бот для интеграций и развлечений" />
+  <meta property="og:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta property="og:url" content="https://VelionBot.github.io" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VelionBot — Телеграм бот для интеграций и развлечений" />
+  <meta name="twitter:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #7ec242;
+    }
+    a {
+      color: #a8ff60;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #161b22;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(90, 90, 90, 0.1);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #30363d;
+      margin: 30px 0;
+    }
+    :root {
+      --green-light: #a8ff60;
+      --green-dark: #7ec242;
+      --dark-gray: #121212;
+      --gray-dark: #1e1e1e;
+      --gray-light: #2a2a2a;
+      --white: #ffffff;
+      --black: #000000;
+    }
+
+    body {
+      background: var(--dark-gray);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--gray-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.75rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      cursor: default;
+    }
+
+    nav.desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav.desktop-nav a {
+      position: relative;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.125rem;
+    }
+    nav.desktop-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--green-light);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    nav.desktop-nav a:hover::after,
+    nav.desktop-nav a:focus::after {
+      width: 100%;
+    }
+    nav.desktop-nav a:hover,
+    nav.desktop-nav a:focus {
+      color: var(--green-light);
+      outline: none;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      color: var(--black);
+      font-weight: 700;
+      padding: 0.65rem 1.8rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(168, 255, 96, 0.4);
+      transition: all 0.3s ease;
+      user-select: none;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-gradient:hover,
+    .btn-gradient:focus {
+      box-shadow: 0 8px 25px rgba(168, 255, 96, 0.8);
+      transform: translateY(-3px);
+      outline: none;
+    }
+    .btn-gradient:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(168, 255, 96, 0.6);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--green-light);
+      font-size: 2rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--gray-dark);
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      padding: 1rem 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 90;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 2rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background-color: var(--green-dark);
+      outline: none;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    section.hero {
+      text-align: center;
+      padding: 6rem 1.5rem 8rem 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+    section.hero h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.hero p {
+      font-size: 1.25rem;
+      color: #bbb;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    }
+    section.hero .btn-gradient {
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+    }
+
+    section.hero.visible h2,
+    section.hero.visible p,
+    section.hero.visible .btn-gradient {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section.fade-slide {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.fade-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    #features {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1rem 6rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media(min-width: 768px) {
+      #features {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+      }
+    }
+    .card {
+      background: var(--gray-light);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(168, 255, 96, 0.7);
+    }
+    .card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card p {
+      color: #ccc;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    #commands {
+      max-width: 800px;
+      margin: 0 auto 6rem auto;
+      margin-top: 15rem;
+      background: var(--gray-dark);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      user-select: none;
+    }
+    #commands h2 {
+      font-size: 2.75rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #commands ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #bbb;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+    #commands ul li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+    }
+    #commands ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green-light);
+      font-weight: 900;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      user-select: none;
+    }
+    #commands code {
+      background: #222;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-family: 'Source Code Pro', monospace;
+      color: var(--green-light);
+      font-weight: 700;
+      user-select: text;
+    }
+
+    section.cta {
+      text-align: center;
+      padding: 5rem 1.5rem 6rem 1.5rem;
+    }
+    section.cta h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 2.5rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      background: var(--gray-dark);
+      text-align: center;
+      padding: 1.25rem 1rem;
+      font-size: 0.875rem;
+      color: #666;
+      user-select: none;
+    }
+
+    @media (max-width: 767px) {
+      nav.desktop-nav {
+        display: none;
+      }
+      .mobile-menu-button {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+  <div class="container header-inner" role="banner">
+    <a href="#hero" class="logo" tabindex="0">VelionBot</a>
+
+    <nav class="desktop-nav" role="navigation" aria-label="Главное меню">
+      <a href="/" tabindex="0">Функции</a>
+      <a href="/" tabindex="0">Команды</a>
+      <a href="/" tabindex="0">Установка</a>
+      <a href="https://t.me/VelionManager" tabindex="0">Поддержка</a>
+      <a href="https://t.me/veliongamesbot" target="_blank" rel="noopener" class="btn-gradient" tabindex="0">Присоединиться</a>
+    </nav>
+
+    <button aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu" class="mobile-menu-button" id="mobile-menu-toggle">&#9776;</button>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Мобильное меню">
+    <a href="#features" tabindex="-1">Функции</a>
+    <a href="#commands" tabindex="-1">Команды</a>
+    <a href="#install" tabindex="-1">Установка</a>
+    <a href="#support" tabindex="-1">Поддержка</a>
+    <a href="https://t.me/VelionGamesBot" target="_blank" rel="noopener" class="btn-gradient" tabindex="-1" style="margin: 0 1.5rem;">Присоединиться</a>
+  </nav>
+</header>
+  <div class="container">
+    <h1>Политика конфиденциальности VelionBot</h1>
+    <p>Дата вступления в силу: <strong>9 июля 2025</strong></p>
+
+    <p>
+      Настоящая Политика конфиденциальности описывает, какие данные собираются, как они используются и какие права имеют пользователи Telegram-бота <strong>VelionBot</strong>.
+      Используя нашего бота, вы соглашаетесь с данной политикой. Если вы не согласны с условиями, пожалуйста, не используйте VelionBot.
+    </p>
+
+    <hr />
+
+    <h2>1. Какие данные мы собираем</h2>
+    <ul>
+      <li><strong>Публичные данные Telegram:</strong> имя, фамилия, username, ID пользователя, аватар (фото профиля).</li>
+      <li><strong>Привязки аккаунтов:</strong> Steam, Twitch и другие, если вы добровольно указали их через команды бота.</li>
+      <li><strong>Взаимодействие с ботом:</strong> команды, сообщения, кнопки и статистика использования.</li>
+      <li><strong>Технические данные:</strong> дата регистрации, IP-адрес (опционально, только при ошибках), информация о браузере (если используется WebView).</li>
+    </ul>
+
+    <h2>2. Как мы используем собранные данные</h2>
+    <ul>
+      <li>Для отображения профиля пользователя внутри бота.</li>
+      <li>Для настройки и персонализации команд (например, /tgprofile, /steamprofile).</li>
+      <li>Для аналитики и улучшения функционала бота.</li>
+      <li>Для связи с пользователем (например, при уведомлениях или обновлениях).</li>
+    </ul>
+
+    <h2>3. Хранение и защита данных</h2>
+    <ul>
+      <li>Данные хранятся на безопасных серверах с ограниченным доступом.</li>
+      <li>Используются современные меры защиты: шифрование, авторизация и резервное копирование.</li>
+      <li>Мы не передаём ваши данные третьим лицам без вашего согласия.</li>
+      <li>По запросу пользователя профиль может быть полностью удалён.</li>
+    </ul>
+
+    <h2>4. Cookies и сторонние сервисы</h2>
+    <ul>
+      <li>VelionBot не использует cookies напрямую, но может применять сторонние решения (например, WebView или виджеты Twitch).</li>
+      <li>Сторонние сервисы (например, Twitch API или Steam API) могут собирать свои данные — ознакомьтесь с их политикой отдельно.</li>
+    </ul>
+
+    <h2>5. Права пользователя</h2>
+    <ul>
+      <li>Вы имеете право запросить информацию о ваших данных.</li>
+      <li>Вы можете удалить свои данные через запрос в <a href="https://t.me/VelionManager">поддержку.</a></li>
+      <li>Вы можете изменить свои привязки в любое время.</li>
+    </ul>
+
+    <h2>6. Возрастные ограничения</h2>
+    <p>Бот предназначен для пользователей старше 13 лет. Если вам меньше 13 — не используйте VelionBot без согласия родителей или опекунов.</p>
+
+    <h2>7. Обновление политики</h2>
+    <p>
+      Мы можем время от времени вносить изменения в эту Политику конфиденциальности. Актуальная версия всегда будет доступна по ссылке:
+      <a href="https://velionproject.github.io/privacy" target="_blank">https://velionproject.github.io/privacy</a>
+    </p>
+
+    <h2>8. Контакты</h2>
+    <p>
+      По вопросам, связанным с конфиденциальностью, вы можете связаться с нами:
+      <br />
+      Telegram: <a href="https://t.me/velionmanager" target="_blank">@VelionManager</a>
+    </p>
+  </div>
+  <footer role="contentinfo" style="
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 3rem 2rem;
+  border-top: 1px solid #333;
+">
+  <div style="
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+  ">
+    <div style="display: flex; align-items: center; gap: 1rem; min-width: 200px; padding-top: 2rem;">
+      <img src="../imgs/velionbot.png" alt="VelionBot" width="42" height="42" style="border-radius: 8px;">
+      <div style="font-size: 1.4rem; font-weight: bold; color: #7fcf6f;">VelionBot</div>
+    </div>
+    <nav style="
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      text-align: left;
+      min-width: 200px;
+    ">
+      <a href="/privacy" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Политика конфиденциальности</a>
+      <a href="https://t.me/VelionManager" target="_blank" rel="noopener" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Официальный ТГК</a>
+      <a href="https://t.me/velionproject" target="_blank" rel="noopener" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">VelionTeam</a>
+      <a href="/docs" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Документация</a>
+    </nav>
+  </div>
+  <div style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #777;">
+    <p>Создано с ♥ командой <strong style="color: #7fcf6f;">Velion</strong>. &copy; 2025 VelionBot. Все права защищены.</p>
+  </div>
+</footer>
+<script>
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('active');
+
+    const links = mobileMenu.querySelectorAll('a');
+    links.forEach(link => {
+      link.tabIndex = mobileMenu.classList.contains('active') ? 0 : -1;
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeSections = document.querySelectorAll('section.fade-slide');
+    const hero = document.querySelector('section.hero');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    fadeSections.forEach(section => observer.observe(section));
+
+    setTimeout(() => hero.classList.add('visible'), 300);
+  });
+
+  const headerHeight = document.querySelector('header').offsetHeight;
+  document.documentElement.style.scrollPaddingTop = headerHeight + 'px';
+</script>
+</body>
+</html>

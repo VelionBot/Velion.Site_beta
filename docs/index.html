@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth bg-gray-900 text-gray-200">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VelionBot — Документация</title>
+  <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
+  <meta name="description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta name="keywords" content="Телеграм, бот, VelionBot, развлечения, Twitch, Steam, мини-игры, модерация, Telegram bot" />
+  <meta name="author" content="VelionBot Team" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VelionBot — Telegram бот для интеграций и развлечений" />
+  <meta property="og:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta property="og:url" content="https://VelionBot.github.io" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VelionBot — Телеграм бот для интеграций и развлечений" />
+  <meta name="twitter:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #7ec242;
+    }
+    a {
+      color: #a8ff60;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #161b22;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(90, 90, 90, 0.1);
+    }
+    ul {
+      padding-left: 20px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #30363d;
+      margin: 30px 0;
+    }
+    :root {
+      --green-light: #a8ff60;
+      --green-dark: #7ec242;
+      --dark-gray: #121212;
+      --gray-dark: #1e1e1e;
+      --gray-light: #2a2a2a;
+      --white: #ffffff;
+      --black: #000000;
+    }
+
+    body {
+      background: var(--dark-gray);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--gray-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.75rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      cursor: default;
+    }
+
+    nav.desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav.desktop-nav a {
+      position: relative;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.125rem;
+    }
+    nav.desktop-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--green-light);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    nav.desktop-nav a:hover::after,
+    nav.desktop-nav a:focus::after {
+      width: 100%;
+    }
+    nav.desktop-nav a:hover,
+    nav.desktop-nav a:focus {
+      color: var(--green-light);
+      outline: none;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      color: var(--black);
+      font-weight: 700;
+      padding: 0.65rem 1.8rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(168, 255, 96, 0.4);
+      transition: all 0.3s ease;
+      user-select: none;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-gradient:hover,
+    .btn-gradient:focus {
+      box-shadow: 0 8px 25px rgba(168, 255, 96, 0.8);
+      transform: translateY(-3px);
+      outline: none;
+    }
+    .btn-gradient:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(168, 255, 96, 0.6);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--green-light);
+      font-size: 2rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--gray-dark);
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      padding: 1rem 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 90;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 2rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background-color: var(--green-dark);
+      outline: none;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    section.hero {
+      text-align: center;
+      padding: 6rem 1.5rem 8rem 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+    section.hero h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.hero p {
+      font-size: 1.25rem;
+      color: #bbb;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    }
+    section.hero .btn-gradient {
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+    }
+
+    section.hero.visible h2,
+    section.hero.visible p,
+    section.hero.visible .btn-gradient {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section.fade-slide {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.fade-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    footer {
+      background: var(--gray-dark);
+      text-align: center;
+      padding: 1.25rem 1rem;
+      font-size: 0.875rem;
+      color: #666;
+      user-select: none;
+    }
+
+    section.install {
+        color: #a8ff60;
+    }
+
+    @media (max-width: 767px) {
+      nav.desktop-nav {
+        display: none;
+      }
+      .mobile-menu-button {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+<header>
+  <div class="container header-inner" role="banner">
+    <a href="/" class="logo" tabindex="0">VelionBot</a>
+
+    <nav class="desktop-nav" role="navigation" aria-label="Главное меню">
+        <a href="/" tabindex="0">Главная</a>
+      <a href="#features" tabindex="0">Функции</a>
+      <a href="#commands" tabindex="0">Команды</a>
+      <a href="#install" tabindex="0">Установка</a>
+      <a href="https://t.me/VelionManager" tabindex="0">Поддержка</a>
+      <a href="https://t.me/veliongamesbot" target="_blank" rel="noopener" class="btn-gradient" tabindex="0">Присоединиться</a>
+    </nav>
+
+    <button aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu" class="mobile-menu-button" id="mobile-menu-toggle">&#9776;</button>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Мобильное меню">
+    <a href="/" tabindex="-1">Главная</a>
+    <a href="#features" tabindex="-1">Функции</a>
+    <a href="#commands" tabindex="-1">Команды</a>
+    <a href="#install" tabindex="-1">Установка</a>
+    <a href="#support" tabindex="-1">Поддержка</a>
+    <a href="https://t.me/VelionGamesBot" target="_blank" rel="noopener" class="btn-gradient" tabindex="-1" style="margin: 0 1.5rem;">Присоединиться</a>
+  </nav>
+</header>
+
+<main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
+
+  <h1 class="text-4xl font-extrabold mb-6 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent select-none">Документация по VelionBot</h1>
+  <p class="mb-8 text-gray-400">Добро пожаловать в полную документацию VelionBot — вашего помощника в Telegram с мини-играми, Twitch/Steam интеграцией и удобным управлением сообществом.</p>
+
+  <!-- Основные команды -->
+  <section id="commands" class="bg-gray-800 rounded-xl shadow-lg p-8 mb-16 select-none">
+    <h2 class="text-3xl font-extrabold mb-8 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">Основные команды VelionBot</h2>
+    <ul class="list-none space-y-6 text-gray-300 text-lg leading-relaxed">
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/start</code> — запуск бота с приветственным сообщением и базовым руководством.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/help</code> — список всех команд существующих в боте.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/tgprofile</code> — показать профиль Telegram пользователя: аватар, ник, ID и статус.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/steamprofile</code> — получить публичную информацию Steam профиля, включая аватар и статистику игр.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/integrations</code> — подключить одну из предложеных интеграций к вашему Telegram-Аккаунту.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/games</code> — список мини-игр доступных в текущий момент.
+      </li>
+      <li>
+        <code class="bg-gray-700 px-3 py-1 rounded font-mono text-lime-400 font-bold">/unlink_twitch/steam</code> — отвязать ранее привязанную к аккаунту интеграцию.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Возможности -->
+  <section id="features" class="mb-16">
+    <h2 class="text-3xl font-extrabold mb-8 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent select-none">Возможности VelionBot</h2>
+    <div class="space-y-8 text-gray-300 text-lg leading-relaxed">
+
+      <article class="bg-gray-800 rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 cursor-default select-none">
+        <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">🎮 Интеграция с Twitch и Steam</h3>
+        <p>Получайте актуальную информацию о стримах, количестве подписчиков, статусе трансляций и игровой статистике. Все данные собираются автоматически, чтобы вы могли легко следить за любимыми стримерами и игроками.</p>
+      </article>
+
+      <article class="bg-gray-800 rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 cursor-default select-none">
+        <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">🎲 Мини-игры и развлечения</h3>
+        <p>Встроенные игры и конкурсы помогут оживить общение в вашем чате. Устраивайте дуэли, викторины, карму-систему и многое другое прямо в Telegram.</p>
+      </article>
+
+      <article class="bg-gray-800 rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 cursor-default select-none">
+        <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">🛡️ Модерация и управление сообществом</h3>
+        <p>Инструменты для администраторов: предупреждения, баны, управление ролями и автоматизация простых задач. Все это помогает поддерживать порядок и комфорт в группе.</p>
+      </article>
+
+      <article class="bg-gray-800 rounded-xl shadow-lg p-6 hover:scale-105 transition-transform duration-300 cursor-default select-none">
+        <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent">🔧 Настройка под себя</h3>
+        <p>Изменяйте префикс команд, язык интерфейса (русский и английский поддерживаются), настройки оповещений и многое другое с помощью удобной панели управления или команд.</p>
+      </article>
+
+    </div>
+  </section>
+  <section id="install" class="mb-16">
+    <h2 class="text-3xl font-extrabold mb-6 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent select-none">Как запустить и настроить VelionBot в <a href="https://t.me/VelionGamesBot">Телеграм</a></h2>
+    <p class="mb-4 text-gray-400">
+      Для установки VelionBot в <a href="https://t.me/VelionGamesBot" class="color: #a8ff60;">Телеграмм</a> выполните следующие шаги:
+    </p>
+    <ol class="list-decimal list-inside text-gray-300 text-lg leading-relaxed mb-6">
+      <li>Запустите бота нажав кнопку Start в Телеграмм<code class="bg-gray-700 px-2 rounded font-mono text-lime-400"><a href="https://t.me/VelionGamesBot">@VelionGamesBot</a></code></li>
+      <li>Используйте первую команду:
+        <pre class="bg-gray-800 rounded-xl p-4 overflow-x-auto text-lime-400 font-mono text-lg select-text mb-4">/help</pre>
+      </li>
+      <li>Привяжите нужные интеграции командой <code class="bg-gray-700 px-2 rounded font-mono text-lime-400">/integrations</code></li>
+      <li>Просмотрите свой интегрированый профиль:
+        <pre class="bg-gray-800 rounded-xl p-4 overflow-x-auto text-lime-400 font-mono text-lg select-text mb-4">/steam | /twitch</pre>
+      </li>
+      <li>Наслаждайтесь <code class="bg-gray-700 px-2 rounded font-mono text-lime-400"><a href="https://t.me/VelionGamesBot">VelionBot</a></code> и развлекайтесь прямо в Телеграм.</li>
+    </ol>
+    <p class="text-gray-400 italic">* Рекомендуется добавить в группу для корректного отображения аватарок / баннеров в интеграциях.</p>
+  </section>
+  <section id="setup" class="mb-16">
+    <h2 class="text-3xl font-extrabold mb-6 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent select-none">Настройка VelionBot</h2>
+    <p class="text-gray-300 mb-4">VelionBot позволяет гибко настраивать поведение через команды и конфигурационные файлы:</p>
+
+    <ul class="list-disc list-inside text-gray-300 text-lg leading-relaxed space-y-3">
+      <li>
+        <strong>Язык интерфейса:</strong> поддерживаются русский и английский, меняется командой <code class="bg-gray-700 px-2 rounded font-mono text-lime-400">/setlang &lt;ru|en&gt;</code>.
+      </li>
+      <li>
+        <strong>Привязка аккаунтов:</strong> Twitch и Steam аккаунты можно связать с вашим Telegram-профилем для удобного доступа к информации.
+      </li>
+      <li>
+        <strong>Оповещения:</strong> настройка уведомлений о новых обновлениях, патчах и рестартах <code class="bg-gray-700 px-2 rounded font-mono text-lime-400"><a href="https://t.me/VelionGamesBot">VelionBot</a></code>.
+      </li>
+      <li>
+        <strong>Модерация:</strong> управление предупреждениями, банами и настройка автомодерации через команды.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Поддержка -->
+  <section id="support" class="mb-16">
+    <h2 class="text-3xl font-extrabold mb-6 bg-gradient-to-r from-lime-400 to-lime-600 bg-clip-text text-transparent select-none">Поддержка и обратная связь</h2>
+    <p class="text-gray-300 mb-4">Если у вас возникли вопросы, предложения или вы хотите сообщить об ошибках, пожалуйста, свяжитесь с нами через официальный канал поддержки:</p>
+    <p>
+      <a href="https://t.me/VelionManager" target="_blank" class="text-lime-400 underline hover:text-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-400" tabindex="0">Telegram поддержки VelionBot</a>
+    </p>
+    <p class="mt-4 text-gray-400 italic">Мы стараемся отвечать быстро и постоянно работаем над улучшением бота!</p>
+  </section>
+
+</main>
+
+
+<footer role="contentinfo" style="
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 3rem 2rem;
+  border-top: 1px solid #333;
+">
+  <div style="
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+  ">
+    <div style="display: flex; align-items: center; gap: 1rem; min-width: 200px; padding-top: 2rem;">
+      <img src="../imgs/velionbot.png" alt="VelionBot" width="42" height="42" style="border-radius: 8px;">
+      <div style="font-size: 1.4rem; font-weight: bold; color: #7fcf6f;">VelionBot</div>
+    </div>
+    <nav style="
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      text-align: left;
+      min-width: 200px;
+    ">
+      <a href="/privacy" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Политика конфиденциальности</a>
+      <a href="https://t.me/VelionManager" target="_blank" rel="noopener" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Официальный ТГК</a>
+      <a href="https://t.me/velionproject" target="_blank" rel="noopener" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">VelionTeam</a>
+      <a href="/docs" style="color: #aaa; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;"
+         onmouseover="this.style.color='#7fcf6f'" onmouseout="this.style.color='#aaa'">Документация</a>
+    </nav>
+  </div>
+  <div style="margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #777;">
+    <p>Создано с ♥ командой <strong style="color: #7fcf6f;">Velion</strong>. &copy; 2025 VelionBot. Все права защищены.</p>
+  </div>
+</footer>
+
+<script>
+  // Мобильное меню
+  const btn = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    menu.classList.toggle('hidden');
+  });
+</script>
+<script>
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('active');
+
+    const links = mobileMenu.querySelectorAll('a');
+    links.forEach(link => {
+      link.tabIndex = mobileMenu.classList.contains('active') ? 0 : -1;
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeSections = document.querySelectorAll('section.fade-slide');
+    const hero = document.querySelector('section.hero');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    fadeSections.forEach(section => observer.observe(section));
+
+    setTimeout(() => hero.classList.add('visible'), 300);
+  });
+
+  const headerHeight = document.querySelector('header').offsetHeight;
+  document.documentElement.style.scrollPaddingTop = headerHeight + 'px';
+</script>
+</body>
+</html>

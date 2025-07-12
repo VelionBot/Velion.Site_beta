@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Страница не найдена | VelionBot</title>
+  <meta name="description" content="Такой страницы не существует во вселенной VelionBot. Вернитесь на главную и продолжите исследование!" />
+  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon" />
+  <meta name="keywords" content="VelionBot, 404, страница не найдена, Discord бот, Velion, ошибки, навигация" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="404 — Страница не найдена | VelionBot" />
+  <meta property="og:description" content="Страница потерялась где-то в кристаллической сети Velion. Но вы можете вернуться домой." />
+  <meta property="og:image" content="https://www.velion.site/imgs/velionbot.png" />
+  <meta property="og:url" content="https://www.velion.site/404" />
+  <meta name="author" content="VelionTeam" />
+  <meta name="theme-color" content="#10B981" />
+  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #0b0f12;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 255, 140, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 140, 0.7);
+    animation: float linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) scale(0.5);
+    }
+    100% {
+      transform: translateY(-120vh) scale(1);
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(270deg, #00ff9d, #18e0aa, #00ffc3, #00ff9d);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s ease infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const count = 50;
+    for (let i = 0; i < count; i++) {
+      const bubble = document.createElement("div");
+      bubble.classList.add("bubble");
+
+      const size = Math.random() * 40 + 20;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${10 + Math.random() * 10}s`;
+      bubble.style.top = `${Math.random() * 100}vh`; // старт рандомно, не снизу
+
+      document.body.appendChild(bubble);
+    }
+  });
+</script>
+
+
+</head>
+<body class="relative flex items-center justify-center min-h-screen text-white">
+  <div id="bubbles-container" class="absolute inset-0 z-0"></div>
+
+  <div class="z-10 text-center px-6">
+    <h1 class="text-6xl md:text-8xl font-bold gradient-text animate-bounce">404</h1>
+    <p class="text-xl md:text-2xl mt-4 text-gray-300 animate-fade-in">
+      Увы, такой страницы не существует во вселенной Velion...
+    </p>
+    <a href="/" class="mt-8 inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-green-500 via-emerald-500 to-green-400 hover:scale-105 transition transform shadow-lg">
+      ⬅️ Вернуться на главную
+    </a>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent z-10"></div>
+</body>
+</html>

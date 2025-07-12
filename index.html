@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>VelionBot — Телеграм бот для управления и развлечений</title>
+  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
+  <meta name="description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta name="keywords" content="Телеграм, бот, VelionBot, развлечения, Twitch, Steam, мини-игры, модерация, Telegram bot" />
+  <meta name="author" content="VelionBot Team" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VelionBot — Telegram бот для интеграций и развлечений" />
+  <meta property="og:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+  <meta property="og:url" content="https://VelionBot.github.io" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VelionBot — Телеграм бот для интеграций и развлечений" />
+  <meta name="twitter:description" content="VelionBot — мощный Телеграм бот с мини-играми, интеграциями Twitch и Steam и многим другим." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --green-light: #a8ff60;
+      --green-dark: #7ec242;
+      --dark-gray: #121212;
+      --gray-dark: #1e1e1e;
+      --gray-light: #2a2a2a;
+      --white: #ffffff;
+      --black: #000000;
+    }
+
+    body {
+      background: var(--dark-gray);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--gray-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.75rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      cursor: default;
+    }
+
+    nav.desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav.desktop-nav a {
+      position: relative;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.125rem;
+    }
+    nav.desktop-nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--green-light);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    nav.desktop-nav a:hover::after,
+    nav.desktop-nav a:focus::after {
+      width: 100%;
+    }
+    nav.desktop-nav a:hover,
+    nav.desktop-nav a:focus {
+      color: var(--green-light);
+      outline: none;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      color: var(--black);
+      font-weight: 700;
+      padding: 0.65rem 1.8rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(168, 255, 96, 0.4);
+      transition: all 0.3s ease;
+      user-select: none;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-gradient:hover,
+    .btn-gradient:focus {
+      box-shadow: 0 8px 25px rgba(168, 255, 96, 0.8);
+      transform: translateY(-3px);
+      outline: none;
+    }
+    .btn-gradient:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(168, 255, 96, 0.6);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--green-light);
+      font-size: 2rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--gray-dark);
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      padding: 1rem 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 90;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 2rem;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background-color: var(--green-dark);
+      outline: none;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    section.hero {
+      text-align: center;
+      padding: 6rem 1.5rem 8rem 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+    section.hero h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    section.hero p {
+      font-size: 1.25rem;
+      color: #bbb;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    }
+    section.hero .btn-gradient {
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+    }
+
+    section.hero.visible h2,
+    section.hero.visible p,
+    section.hero.visible .btn-gradient {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section.fade-slide {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.fade-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    #features {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1rem 6rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media(min-width: 768px) {
+      #features {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+      }
+    }
+    .card {
+      background: var(--gray-light);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(168, 255, 96, 0.7);
+    }
+    .card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card p {
+      color: #ccc;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    #commands {
+      max-width: 800px;
+      margin: 0 auto 6rem auto;
+      margin-top: 15rem;
+      background: var(--gray-dark);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      user-select: none;
+    }
+    #commands h2 {
+      font-size: 2.75rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #commands ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #bbb;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+    #commands ul li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+    }
+    #commands ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green-light);
+      font-weight: 900;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      user-select: none;
+    }
+    #commands code {
+      background: #222;
+      padding: 3px 7px;
+      border-radius: 6px;
+      font-family: 'Source Code Pro', monospace;
+      color: var(--green-light);
+      font-weight: 700;
+      user-select: text;
+    }
+
+    section.cta {
+      text-align: center;
+      padding: 5rem 1.5rem 6rem 1.5rem;
+    }
+    section.cta h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 2.5rem;
+      background: linear-gradient(90deg, var(--green-light), var(--green-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    } 
+
+    @media (max-width: 767px) {
+      nav.desktop-nav {
+        display: none;
+      }
+      .mobile-menu-button {
+        display: block;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner" role="banner">
+    <a href="#hero" class="logo" tabindex="0">VelionBot</a>
+
+    <nav class="desktop-nav" role="navigation" aria-label="Главное меню">
+      <a href="#features" tabindex="0">Функции</a>
+      <a href="#commands" tabindex="0">Команды</a>
+      <a href="#install" tabindex="0">Установка</a>
+      <a href="https://t.me/VelionManager" tabindex="0">Поддержка</a>
+      <a href="https://t.me/veliongamesbot" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold shadow-lg hover:from-emerald-400 hover:to-green-500 transition-all duration-300">
+  Войти
+</a>
+
+    </nav>
+
+    <button aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu" class="mobile-menu-button" id="mobile-menu-toggle">&#9776;</button>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Мобильное меню">
+    <a href="#features" tabindex="-1">Функции</a>
+    <a href="#commands" tabindex="-1">Команды</a>
+    <a href="#install" tabindex="-1">Установка</a>
+    <a href="#support" tabindex="-1">Поддержка</a>
+    <a href="https://t.me/VelionGamesBot" target="_blank" rel="noopener" class="btn-gradient" tabindex="-1" style="margin: 0 1.5rem;">Присоединиться</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="hero" class="hero visible" tabindex="1" aria-label="Главная секция">
+    <h2>VelionBot — Ваш идеальный способ расслабиться!</h2>
+    <p>Играйте в мини-игры или хвастайтесь с помощью интеграций Twitch и Steam своими профилями.</p>
+    <a href="https://t.me/VelionGamesBot" target="_blank" rel="noopener" class="btn-gradient" tabindex="0">Начать сейчас</a>
+  </section>
+
+  <section id="features" class="fade-slide visible" tabindex="-1" aria-label="Функции VelionBot" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+  <div class="card" style="flex: 1 1 300px; max-width: 320px; background: #222; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    <h3>Мини-игры и развлечения</h3>
+    <p>Игры, казино и командные активности прямо в чате — сделайте ваш чат живым и интересным для всех участников.</p>
+  </div>
+  <div class="card" style="flex: 1 1 300px; max-width: 320px; background: #222; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    <h3>Интеграция Twitch и Steam</h3>
+    <p>Получайте статистику и оповещения о стримах, показывайте профили и подписчиков — без API ключей и сложных настроек.</p>
+  </div>
+  <div class="card" style="flex: 1 1 300px; max-width: 320px; background: #222; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    <h3>Персонализация и темы</h3>
+    <p>Кастомизируйте бота в своем чате так, как нравиться вам. (В текущий момент доступно 3 темы)</p>
+  </div>
+  <div class="card" style="flex: 1 1 300px; max-width: 320px; background: #222; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    <h3>Множество режимов</h3>
+    <p>В боте имеется множество режимов, некоторые чисто для игр а некоторые и для медиа.</p>
+  </div>
+  <div class="card" style="flex: 1 1 300px; max-width: 320px; background: #222; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    <h3>Оповещения и уведомления</h3>
+    <p>Получайте уведомления о важных событиях, новостях проекта прямо в личные сообщения.</p>
+  </div>
+</section>
+
+
+  <section id="commands" tabindex="-1" aria-label="Список команд VelionBot">
+    <h2>Основные команды</h2>
+    <ul>
+      <li><code>!help</code> — список всех команд и помощь</li>
+      <li><code>!info</code> — информация о боте и сервере</li>
+      <li><code>!stream</code> — информация о текущем стриме Twitch</li>
+      <li><code>!steamprofile @юзернейм</code> — показать профиль Steam пользователя</li>
+      <li><code>!games</code> — запустить мини-игры</li>
+    </ul>
+  </section>
+
+  <section id="actions" class="fade-slide" tabindex="-1" aria-label="Установка и поддержка VelionBot" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 4rem; margin-bottom: 5rem">
+  <div class="card" style="flex: 1 1 320px; max-width: 380px; background: #222; padding: 2rem 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); text-align: center;">
+    <h2 style="color: #a3d977;">Простая установка</h2>
+    <p style="color: #ccc;">Добавьте VelionBot на ваш сервер Discord через официальную ссылку, настройте права — и готово.</p>
+    <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=8" target="_blank" rel="noopener" class="btn-gradient" style="margin-top: 1rem; display: inline-block; background: linear-gradient(90deg, #7fcf6f, #a3d977); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: bold; color: #121518; text-decoration: none;">Пригласить бота</a>
+  </div>
+
+  <div class="card" style="flex: 1 1 320px; max-width: 380px; background: #222; padding: 2rem 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); text-align: center; ">
+    <h2 style="color: #a3d977;">Поддержка и обратная связь</h2>
+    <p style="color: #ccc;">Есть вопросы или идеи? Присоединяйтесь к чату и общайтесь с командой и сообществом.</p>
+    <a href="https://t.me/VelionManager" target="_blank" rel="noopener" class="btn-gradient" style="margin-top: 1rem; display: inline-block; background: linear-gradient(90deg, #7fcf6f, #a3d977); padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: bold; color: #121518; text-decoration: none;">Перейти в поддержку</a>
+  </div>
+</section>
+</main>
+<footer id="contact" class="bg-[#0e0e0e] text-gray-400 py-12 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-sm">
+    <!-- Логотип и описание -->
+    <div>
+      <h3 class="text-emerald-400 text-xl font-bold mb-3 hover:text-emerald-500 transition-colors">VelionBot</h3>
+      <p class="text-gray-500">Создан с магией ❤️ и кодом.<br>Версия 1.0.0</p>
+    </div>
+
+    <!-- Ссылки -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Ссылки</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Добавить в Discord</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Интеграции</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionBank</a></li>
+      </ul>
+    </div>
+
+    <!-- Контакты -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Контакты</h4>
+      <ul class="space-y-1">
+        <li><span class="text-gray-400">Telegram: @VelionTeam</span></li>
+        <li><span class="text-gray-400">Менеджер: @VelionManager</span></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Тех-Поддержка</a></li>
+      </ul>
+    </div>
+
+    <!-- Соцсети -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Соцсети</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Discord</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Telegram</a></li>
+      </ul>
+    </div>
+
+    <!-- Компания -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Компания</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionTeam</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionCommunity</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">TikTok</a></li>
+      </ul>
+    </div>
+
+    <!-- Правовая информация -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Правовая информация</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Политика конфиденциальности</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Пользовательское соглашение</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Правила использования</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Политика Cookies</a></li>
+      </ul>
+    </div>
+
+    <!-- Сообщество -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Сообщество</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Discord-сервер</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Партнёрство</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Новости проекта</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Поддержка проекта</a></li>
+      </ul>
+    </div>
+
+    <!-- Навигация -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Навигация</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Главная</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Особенности</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Документация</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Нижняя строка -->
+  <p class="mt-10 text-center text-gray-500 text-xs sm:text-sm">
+    © 2025 VelionBot. Все права защищены.
+  </p>
+</footer>
+</body>
+</html>

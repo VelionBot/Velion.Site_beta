@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Панель управления | VelionBot</title>
+  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0f12;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 140, 0.1);
+      box-shadow: 0 0 15px rgba(0, 255, 140, 0.4);
+      animation: float linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); }
+      100% { transform: translateY(-120vh) scale(1); }
+    }
+
+    .gradient-text {
+      background: linear-gradient(270deg, #00ff9d, #18e0aa, #00ffc3, #00ff9d);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 8s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .sidebar {
+      background-color: #0e151a;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 5px 0 15px rgba(0, 255, 140, 0.08);
+      z-index: 10;
+    }
+
+    .nav-link:hover {
+      color: #10b981;
+      transform: translateX(6px);
+      transition: 0.3s;
+    }
+
+    .card {
+      background: rgba(15, 20, 25, 0.7);
+      border: 1px solid rgba(0, 255, 140, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 8px 35px rgba(0, 255, 140, 0.08);
+      transition: all 0.3s ease;
+      min-height: 240px;
+      z-index: 1;
+    }
+
+    .card:hover {
+      transform: scale(1.015);
+      box-shadow: 0 12px 40px rgba(0, 255, 140, 0.15);
+    }
+
+    .logout-btn {
+      background: linear-gradient(to right, #ff4e4e, #ff6b6b);
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      filter: brightness(1.1);
+      transform: scale(1.03);
+    }
+
+    #bubbles-container {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: #999;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+        html, body {
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    html.light {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    html.light body {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    html.light .sidebar {
+      background-color: #ffffff;
+      color: #111827;
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+    }
+
+    html.light .nav-link {
+      color: #4b5563;
+    }
+
+    html.light .nav-link:hover {
+      color: #059669;
+    }
+
+    html.light .card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      color: #111827;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    html.light .card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    html.light .logout-btn {
+      background: linear-gradient(to right, #ef4444, #f87171);
+      color: #fff;
+    }
+
+    html.light footer {
+      color: #4b5563;
+    }
+
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const count = 60;
+      const container = document.getElementById("bubbles-container");
+
+      for (let i = 0; i < count; i++) {
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+
+        const size = Math.random() * 50 + 30;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.top = `${Math.random() * 100}vh`;
+        bubble.style.animationDuration = `${10 + Math.random() * 15}s`;
+
+        container.appendChild(bubble);
+      }
+    });
+  </script>
+</head>
+
+<body class="flex min-h-screen relative">
+  <div id="bubbles-container"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar w-64 p-6 flex flex-col justify-between fixed left-0 top-0 bottom-0 z-10">
+    <div>
+      <h2 class="text-3xl font-bold gradient-text mb-8">VelionBot</h2>
+      <nav class="space-y-5 text-gray-300">
+        <a href="/" class="flex items-center gap-2 nav-link">
+  <!-- Домик -->
+  <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9 21V12h6v9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Главная
+</a>
+<a href="/dashboard" class="flex items-center gap-2 nav-link">
+  <!-- Монета / банк -->
+  <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M12 3C7.03 3 3 5.24 3 8v8c0 2.76 4.03 5 9 5s9-2.24 9-5V8c0-2.76-4.03-5-9-5z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 3v18M3 8c0 2.76 4.03 5 9 5s9-2.24 9-5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Панель управления
+</a>
+<a href="/velionbank" class="flex items-center gap-2 nav-link">
+  <!-- Монета / банк -->
+  <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M12 3C7.03 3 3 5.24 3 8v8c0 2.76 4.03 5 9 5s9-2.24 9-5V8c0-2.76-4.03-5-9-5z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 3v18M3 8c0 2.76 4.03 5 9 5s9-2.24 9-5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  VelionBank
+</a>
+
+  <a href="/docs" class="flex items-center gap-2 nav-link">
+    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4 4.5A2.5 2.5 0 016.5 2H20v15H6.5A2.5 2.5 0 014 14.5V4.5z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Документация
+  </a>
+
+<a href="#" id="toggle-theme" class="flex items-center gap-2 nav-link">
+  <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Тема
+</a>
+
+
+      </nav>
+    </div>
+    <a href="/logout" class="logout-btn mt-8 px-4 py-2 rounded-xl text-white text-center shadow-lg">Выйти</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="ml-64 flex-1 p-12 overflow-y-auto relative z-10">
+    <h1 class="text-4xl font-bold mb-10 gradient-text">Добро пожаловать в Панель</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="card" id="profile-card">
+        <div class="flex items-center gap-4 mb-4">
+            <img id="user-avatar" src="" alt="avatar" class="w-12 h-12 rounded-full" />
+            <h2 class="text-3xl font-semibold" id="user-name">Профиль</h2>
+        </div>
+        <p class="text-gray-300 leading-relaxed text-lg">
+        👤 Ник: <span id="user-tag">@Loading...</span><br>
+        🆔 ID: <span id="user-id">Загрузка...</span>
+        </p>
+        </div>
+
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/10065/10065425.png" class="w-12 h-12" />
+          <h2 class="text-3xl font-semibold">VelionBank</h2>
+        </div>
+        <p class="text-gray-300 leading-relaxed text-lg">🔐 Счёт: VB-902142<br>🏦 Уровень: Elite<br>💎 Баланс: 3,250 Кристаллов Этерии</p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/10065/10065398.png" class="w-12 h-12" />
+          <h2 class="text-3xl font-semibold">Активность</h2>
+        </div>
+        <p class="text-gray-300 leading-relaxed text-lg">💬 Сообщений: 1452<br>🕒 Последняя активность: 12 мин назад<br>🔥 Уровень: Высокий</p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/3248/3248679.png" class="w-12 h-12" />
+          <h2 class="text-3xl font-semibold">Статистика</h2>
+        </div>
+        <p class="text-gray-300 leading-relaxed text-lg">🌐 Серверов: 73<br>👥 Участников: 8,924<br>🚀 Аптайм: 99.98%</p>
+      </div>
+    </div>
+
+<!-- Footer -->
+<footer id="contact" class=" text-gray-400 py-12 px-6 z-10 relative">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-sm">
+    <!-- Логотип и описание -->
+    <div>
+      <h3 class="text-emerald-400 text-xl font-bold mb-3 hover:text-emerald-500 transition-colors">VelionBot</h3>
+      <p class="text-gray-500">Создан с магией ❤️ и кодом.<br>Версия 1.0.0</p>
+    </div>
+
+    <!-- Ссылки -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Ссылки</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Добавить в Discord</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Интеграции</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionBank</a></li>
+      </ul>
+    </div>
+
+    <!-- Контакты -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Контакты</h4>
+      <ul class="space-y-1">
+        <li><span class="text-gray-400">Telegram: @VelionTeam</span></li>
+        <li><span class="text-gray-400">Менеджер: @VelionManager</span></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Тех-Поддержка</a></li>
+      </ul>
+    </div>
+
+    <!-- Соцсети -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Соцсети</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Discord</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Telegram</a></li>
+      </ul>
+    </div>
+
+    <!-- Компания -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Компания</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionTeam</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">VelionCommunity</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">TikTok</a></li>
+      </ul>
+    </div>
+
+    <!-- Правовая информация -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Правовая информация</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Политика конфиденциальности</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Пользовательское соглашение</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Правила использования</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Политика Cookies</a></li>
+      </ul>
+    </div>
+
+    <!-- Сообщество -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Сообщество</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Discord-сервер</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Партнёрство</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Новости проекта</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Поддержка проекта</a></li>
+      </ul>
+    </div>
+
+    <!-- Навигация -->
+    <div>
+      <h4 class="text-white font-semibold mb-2">Навигация</h4>
+      <ul class="space-y-1">
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Главная</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Особенности</a></li>
+        <li><a href="#" class="hover:text-emerald-400 transition-colors">Документация</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Нижняя строка -->
+  <p class="mt-10 text-center text-gray-500 text-xs sm:text-sm">
+    © 2025 VelionBot. Все права защищены.
+  </p>
+</footer>
+
+  </main>
+
+<script>
+  // Эти данные передаются с сервера (заполните из вашего OAuth2)
+  const user = {
+    username: "VelionUser", // Ник
+    discriminator: "0001",  // если нужен
+    id: "124089021938",     // Discord ID
+    avatar: "d4f920d8c8b928f8ad330c01c68ef1d9", // hash
+  };
+
+  const avatarURL = user.avatar
+    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+    : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+
+  document.getElementById("user-avatar").src = avatarURL;
+  document.getElementById("user-tag").textContent = "@" + user.username;
+  document.getElementById("user-id").textContent = user.id;
+  document.getElementById("user-name").textContent = user.username;
+</script>
+
+
+<script>
+  // Смена темы с анимацией
+  const themeBtn = document.getElementById("toggle-theme");
+  const html = document.documentElement;
+
+  // При загрузке страницы — установить сохранённую тему
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("theme") === "light") {
+      html.classList.remove("dark");
+      html.classList.add("light");
+    }
+  });
+
+  themeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    html.classList.add("transitioning"); // плавность
+
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      html.classList.add("light");
+      localStorage.setItem("theme", "light");
+    } else {
+      html.classList.remove("light");
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+
+    setTimeout(() => html.classList.remove("transitioning"), 500);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вход | VelionBot</title>
+  <meta name="description" content="Войдите через Discord, чтобы получить доступ к панели управления VelionBot." />
+  <link rel="icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
+  <meta property="og:title" content="Вход | VelionBot" />
+  <meta property="og:description" content="Авторизуйтесь через Discord и управляйте своим опытом с VelionBot." />
+  <meta property="og:image" content="https://www.velion.site/imgs/velionbot.png" />
+  <meta property="og:url" content="https://www.velion.site/login" />
+  <meta name="theme-color" content="#10B981" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0b0f12;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 140, 0.2);
+      box-shadow: 0 0 15px rgba(0, 255, 140, 0.5);
+      animation: float linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); }
+      100% { transform: translateY(-120vh) scale(1); }
+    }
+
+    .gradient-text {
+      background: linear-gradient(270deg, #00ff9d, #18e0aa, #00ffc3, #00ff9d);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 8s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .button-shadow {
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    }
+  </style>
+</head>
+
+<body class="relative flex items-center justify-center min-h-screen text-white">
+  <div id="bubbles-container" class="absolute inset-0 z-0"></div>
+
+  <div class="z-10 text-center px-6">
+    <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4">Добро пожаловать в VelionBot</h1>
+    <p class="text-lg md:text-xl text-gray-400 mb-10">Войдите через Discord, чтобы продолжить</p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+      <a href="/login" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-green-400 text-white font-semibold text-lg button-shadow hover:scale-105 transition-all duration-300">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" class="w-6 h-6" />
+        Войти через Discord
+      </a>
+
+      <a href="/" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-gray-600 text-gray-300 hover:bg-gray-800/50 transition-all duration-300">
+        ⬅️ Вернуться на главную
+      </a>
+    </div>
+
+    <p class="mt-6 text-sm text-gray-500">Авторизация полностью безопасна и защищена</p>
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent z-10"></div>
+
+  <script>
+    // Генерация пузырей
+    document.addEventListener("DOMContentLoaded", () => {
+      const count = 45;
+      for (let i = 0; i < count; i++) {
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+
+        const size = Math.random() * 40 + 20;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.animationDuration = `${10 + Math.random() * 10}s`;
+        bubble.style.top = `${Math.random() * 100}vh`;
+
+        document.body.appendChild(bubble);
+      }
+    });
+  </script>
+</body>
+</html>

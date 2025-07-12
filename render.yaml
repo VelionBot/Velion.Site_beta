@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: velion-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host=0.0.0.0 --port=10000
+    envVars:
+      - key: DISCORD_CLIENT_ID
+        value: ТВОЙ_ID
+      - key: DISCORD_CLIENT_SECRET
+        value: ТВОЙ_SECRET
+      - key: DISCORD_REDIRECT_URI
+        value: https://velion-backend.onrender.com/callback
+      - key: FRONTEND_URL
+        value: https://www.velion.site/dashboard
