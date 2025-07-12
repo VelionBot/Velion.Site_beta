@@ -1,6 +1,7 @@
 services:
   - type: web
-    name: velion-app
+    name: velion-site
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    plan: free
