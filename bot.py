@@ -1235,7 +1235,6 @@ async def on_ready():
         status=discord.Status.idle
     )
 
-    save_json("mutes.json", mutes)
     reset_activity.start()
     print(f"🔌 Бот {bot.user} запущен и готов к работе.")
 
