@@ -5,16 +5,17 @@ import requests, json, os
 # Импорт Discord-бота
 from bot import start_bot
 
-app = Flask(__name__)
+# Создание Flask-приложения
+app = Flask(__name__, static_folder='imgs')
 app.secret_key = 'supersecretkey'
 
 # OAuth2 настройки
 CLIENT_ID = '1392912652916887602'
 CLIENT_SECRET = 'fcN21ynvpkLTqQ2bnbl9Z-jnodehw1V3'
-REDIRECT_URI = 'https://velion-site-beta.onrender.com/callback'  # Укажи домен Render
+REDIRECT_URI = 'https://velion-site-beta.onrender.com/callback'
 BOT_ID = '1392912652916887602'
 
-# === Flask routes ===
+# ==== ROUTES ====
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -88,16 +89,14 @@ def dashboard():
     access_token = session['discord_token']['access_token']
     user = session['user']
 
-    # Получаем сервера
     guilds = get_user_guilds(access_token)
 
     bank_data = None
-    user_data = None
+    users_data = None
 
     if os.path.exists('users_data.json'):
         with open('users_data.json', 'r', encoding='utf-8') as f:
             users_data = json.load(f)
-            user_data = users_data.get(user['id'])
 
     if os.path.exists('bank.json'):
         with open('bank.json', 'r', encoding='utf-8') as f:
@@ -123,12 +122,11 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-# === Запуск сайта и бота одновременно ===
-port = int(os.environ.get("PORT", 5000))  # Render сам задаёт PORT
-app.run(host="0.0.0.0", port=port)
-
-app = Flask(__name__, static_folder='imgs')
+# === Запуск Flask + бота ===
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
 if __name__ == '__main__':
     Thread(target=run_flask).start()
-    start_bot()  # импортируй и запускай бота из bot.py
+    start_bot()
